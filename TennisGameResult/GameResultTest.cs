@@ -26,5 +26,26 @@ namespace TennisGameResult
             Assert.AreEqual("15vsLove", result);
         }
 
+        [TestMethod]
+        public void GetGameResult_2vs0_Should_Return_30vsLove()
+        {
+            var scores = new ScoreTable();
+            scores.p1 = 2;
+            scores.p2 = 0;
+            var result = scores.score();
+            Assert.AreEqual("30vsLove", result);
+        }
+        [TestMethod]
+        public void GetGameResult_3vs0_Should_Return_40vsLove()
+        {
+            var scores = new ScoreTable();
+            scores.p1 = 3;
+            scores.p2 = 0;
+            var result = scores.score();
+            Assert.AreEqual("40vsLove", result);
+        }
+
+        
+
     }
 }

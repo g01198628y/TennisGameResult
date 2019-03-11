@@ -17,9 +17,17 @@ namespace TennisGameResult
             {
                 return "AllLove";
             }
-            else if (p1 > p2)
+            else if (p1 - p2 ==1)
             {
                 return "15vsLove";
+            }
+            else if (p1 - p2 ==2)
+            {
+                return "30vsLove";
+            }
+            else if (p1 - p2 == 3)
+            {
+                return "40vsLove";
             }
 
             return null;
