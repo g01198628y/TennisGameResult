@@ -23,7 +23,9 @@ namespace TennisGameResult
                 }
                 else if (p1 - p2 == 2)
                 {
-                    return "30vsLove";
+                    var result = p1 - p2;
+
+                    return (result * 15 + "vs" + "Love");
                 }
 
                 else if (p1 - p2 == 3)
