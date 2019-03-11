@@ -13,27 +13,44 @@ namespace TennisGameResult
 
         public string score()
         {
-             if (p1 - p2 == 1)
+            if (p1 > p2)
             {
-                return "15vsLove";
+                if (p1 - p2 == 1)
+                {
+                    var result = p1 - p2;
+
+                    return (result * 15 + "vs" + "Love");
+                }
+                else if (p1 - p2 == 2)
+                {
+                    return "30vsLove";
+                }
+
+                else if (p1 - p2 == 3)
+                {
+                    return "40vsLove";
+                }
             }
-            else if (p1 - p2 == 2)
+            else if (p1 < p2)
             {
-                return "30vsLove";
+                if (p1 - p2 == -1)
+                {
+                    return "Lovevs15";
+                }
             }
 
-            else if (p1 - p2 == 3)
+            else
             {
-                return "40vsLove";
+                if ((p1 + p2) / 2 == 1)
+                {
+                    return "15vs15";
+                }
+                else if ((p1 + p2) / 2 == 0)
+                {
+                    return "AllLove";
+                }
             }
-            else if ((p1 + p2) / 2 == 1)
-            {
-                return "15vs15";
-            }
-            else if ((p1 + p2) / 2 == 0)
-            {
-                return "AllLove";
-            }
+
             return null;
         }
     }
