@@ -13,23 +13,27 @@ namespace TennisGameResult
 
         public string score()
         {
-            if (p1 == p2)
-            {
-                return "AllLove";
-            }
-            else if (p1 - p2 ==1)
+             if (p1 - p2 == 1)
             {
                 return "15vsLove";
             }
-            else if (p1 - p2 ==2)
+            else if (p1 - p2 == 2)
             {
                 return "30vsLove";
             }
+
             else if (p1 - p2 == 3)
             {
                 return "40vsLove";
             }
-
+            else if ((p1 + p2) / 2 == 1)
+            {
+                return "15vs15";
+            }
+            else if ((p1 + p2) / 2 == 0)
+            {
+                return "AllLove";
+            }
             return null;
         }
     }

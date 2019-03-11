@@ -44,6 +44,15 @@ namespace TennisGameResult
             var result = scores.score();
             Assert.AreEqual("40vsLove", result);
         }
+        [TestMethod]
+        public void GetGameResult_1vs1_Should_Return_15vs15()
+        {
+            var scores = new ScoreTable();
+            scores.p1 = 1;
+            scores.p2 = 1;
+            var result = scores.score();
+            Assert.AreEqual("15vs15", result);
+        }
 
         
 
