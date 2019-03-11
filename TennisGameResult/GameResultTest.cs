@@ -15,16 +15,16 @@ namespace TennisGameResult
             var result = scores.score();
             Assert.AreEqual("AllLove",result);
         }
-    }
 
-    public class ScoreTable
-    {
-        public int p1 { get; set; }
-        public int p2 { get; set; }
-
-        public string score()
+        [TestMethod]
+        public void GetGameResult_1vs0_Should_Return_15vsLove()
         {
-            return "AllLove";
+            var scores = new ScoreTable();
+            scores.p1 = 1;
+            scores.p2 = 0;
+            var result = scores.score();
+            Assert.AreEqual("15vsLove", result);
         }
+
     }
 }
