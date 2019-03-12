@@ -48,9 +48,8 @@ namespace TennisGameResult
 
             else
             {
-             
 
-                 if (totalScoreAvg == 3)
+                 if (totalScoreAvg >= 3)
                 {
                     return "Deuce";
                 }
