@@ -19,35 +19,40 @@ namespace TennisGameResult
                 {
                     var result = p1 - p2;
 
-                    return (result * 15 + "vs" + "Love");
+                    return (result * 15 + "Love");
                 }
                 else if (p1 - p2 == 2)
                 {
                     var result = p1 - p2;
 
-                    return (result * 15 + "vs" + "Love");
+                    return (result * 15 + "Love");
                 }
 
                 else if (p1 - p2 == 3)
                 {
-                    return "40vsLove";
+                    return "40Love";
                 }
             }
             else if (p1 < p2)
             {
                 if (p1 - p2 == -1)
                 {
-                    return "Lovevs15";
+                    return "Love15";
                 }
             }
 
             else
             {
-                var totalScoreAvg = (p1 + p2)/2;
-                if (totalScoreAvg == 1)
+                var totalScoreAvg = (p1 + p2) / 2;
+                if (totalScoreAvg == 3)
+                {
+                    return "Deuce";
+                }
+
+                else if (totalScoreAvg == 1)
                 {
                     var result = totalScoreAvg * 15;
-                    return result +"vs"+ result;
+                    return result.ToString() + result;
                 }
                 else if (totalScoreAvg == 0)
                 {
