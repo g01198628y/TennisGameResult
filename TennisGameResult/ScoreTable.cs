@@ -13,26 +13,31 @@ namespace TennisGameResult
 
         public string score()
         {
+            var sub = p1 - p2;
+            var totalScoreAvg = (p1 + p2) / 2;
+
             if (p1 > p2)
             {
-                if (p1 - p2 == 1)
-                {
-                    var result = p1 - p2;
 
-                    return (result * 15 + "Love");
+                if (p1 - p2 == 1 && totalScoreAvg < 3)
+                {
+                    return (sub * 15 + "Love");
                 }
                 else if (p1 - p2 == 2)
                 {
-                    var result = p1 - p2;
-
-                    return (result * 15 + "Love");
+                    return (sub * 15 + "Love");
                 }
 
                 else if (p1 - p2 == 3)
                 {
                     return "40Love";
                 }
+                else if (p1 - p2 == 1 && totalScoreAvg >= 3)
+                {
+                    return "P1Deuce1";
+                }
             }
+
             else if (p1 < p2)
             {
                 if (p1 - p2 == -1)
@@ -43,8 +48,9 @@ namespace TennisGameResult
 
             else
             {
-                var totalScoreAvg = (p1 + p2) / 2;
-                if (totalScoreAvg == 3)
+             
+
+                 if (totalScoreAvg == 3)
                 {
                     return "Deuce";
                 }

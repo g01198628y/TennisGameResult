@@ -71,6 +71,15 @@ namespace TennisGameResult
             var result = scores.score();
             Assert.AreEqual("Deuce", result);
         }
+        [TestMethod]
+        public void GetGameResult_4vs3_Should_Return_P1Deuce1()
+        {
+            var scores = new ScoreTable();
+            scores.p1 = 4;
+            scores.p2 = 3;
+            var result = scores.score();
+            Assert.AreEqual("P1Deuce1", result);
+        }
 
         
 
