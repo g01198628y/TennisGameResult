@@ -43,11 +43,13 @@ namespace TennisGameResult
 
             else
             {
-                if ((p1 + p2) / 2 == 1)
+                var totalScoreAvg = (p1 + p2)/2;
+                if (totalScoreAvg == 1)
                 {
-                    return "15vs15";
+                    var result = totalScoreAvg * 15;
+                    return result +"vs"+ result;
                 }
-                else if ((p1 + p2) / 2 == 0)
+                else if (totalScoreAvg == 0)
                 {
                     return "AllLove";
                 }
