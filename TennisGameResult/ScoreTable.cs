@@ -14,44 +14,26 @@ namespace TennisGameResult
         public string score()
         {
             var p1Subp2 = p1 - p2;
-            var p2Subp1 = p2 - p1;
             var totalScoreAvg = (p1 + p2) / 2;
 
-            if (p1 > p2)
+
+            if (totalScoreAvg >= 3)
             {
-
-                if (p1Subp2 == 1 && totalScoreAvg < 3)
+                if (p1 == p2)
                 {
-                    return (p1Subp2 * 15 + "Love");
+                    return "Deuce";
                 }
-                else if (p1Subp2 == 2)
-                {
-                    return (p1Subp2 * 15 + "Love");
-                }
-
-                else if (p1Subp2 == 3)
-                {
-                    return "40Love";
-                }
-                else if (p1Subp2 == 1 && totalScoreAvg >= 3)
+                else if (p1Subp2 == 1)
                 {
                     return "P1Deuce1";
                 }
-                else
-                {
-                    return "P1Win";
-                }
-            }
-
-            else if (p1 < p2)
-            {
-                if (p2Subp1 == 1 && totalScoreAvg < 3)
-                {
-                    return "Love"+ p2Subp1*15;
-                }
-                else if (p2Subp1 == 1 && totalScoreAvg >= 3)
+                else if (p1Subp2 == -1)
                 {
                     return "P2Deuce1";
+                }
+                else if (p1Subp2 == 2)
+                {
+                    return "P1Win";
                 }
                 else
                 {
@@ -59,22 +41,35 @@ namespace TennisGameResult
                 }
             }
 
+            else if (p1Subp2 > 0)
+            {
+                if (p1Subp2 == 3)
+                {
+                    return "40Love";
+                }
+                return (p1Subp2 * 15 + "Love");
+
+            }
+
+            else if (p1Subp2 < 0)
+            {
+                if (p1Subp2 == -3)
+                {
+                    return "Love40";
+                }
+                return ("Love"+p1Subp2 * -15 );
+            }
+
             else
             {
-                 if (totalScoreAvg >= 3)
-                {
-                    return "Deuce";
-                }
-         
-                 else if (totalScoreAvg == 1)
-                {
-                    var result = totalScoreAvg * 15;
-                    return result.ToString() + result;
-                }
-                else if (totalScoreAvg == 0)
+                if (totalScoreAvg == 0)
                 {
                     return "AllLove";
                 }
+
+                var result = totalScoreAvg * 15;
+                return result.ToString() + result;
+
             }
 
             return null;
