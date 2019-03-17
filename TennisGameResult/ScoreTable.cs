@@ -8,71 +8,69 @@ namespace TennisGameResult
 {
     public class ScoreTable
     {
-        public int p1 { get; set; }
-        public int p2 { get; set; }
+        public int playerOneScore { get; set; }
+        public int playerTwoScore { get; set; }
+
 
         public string score()
         {
-            var p1Subp2 = p1 - p2;
-            var totalScoreAvg = (p1 + p2) / 2;
+            var playerOneSubPlayerTwo = playerOneScore - playerTwoScore;
+            float scoreAvg = (playerOneScore + playerTwoScore) / 2f;
 
 
-            if (totalScoreAvg >= 3)
+            if (scoreAvg == 0)
             {
-                if (p1 == p2)
+                return "AllLove";
+            }
+
+            else if (scoreAvg >= 3)
+            {
+                switch (playerOneSubPlayerTwo)
                 {
-                    return "Deuce";
+                    case 0:
+                        return "Deuce";
+                    case 1:
+                        return "PlayerOneDecue1";
+                    case -1:
+                        return "PlayerTwoDecue1";
+                    case 2:
+                        return "PlayerOneWin!!!";
+                    case -2:
+                        return "PlayerTwoWin!!!";
                 }
-                else if (p1Subp2 == 1)
+            }
+
+            else if (playerOneSubPlayerTwo != 0)
+            {
+                if (playerOneSubPlayerTwo == 3 || playerOneSubPlayerTwo == -3)
                 {
-                    return "P1Deuce1";
-                }
-                else if (p1Subp2 == -1)
-                {
-                    return "P2Deuce1";
-                }
-                else if (p1Subp2 == 2)
-                {
-                    return "P1Win";
+                    if (playerOneSubPlayerTwo > 0)
+                    {
+                        return "40Love";
+                    }
+                    else
+                    {
+                        return "Love40";
+                    }
                 }
                 else
                 {
-                    return "P2Win";
+                    if (playerOneSubPlayerTwo > 0)
+                    {
+                        return (playerOneSubPlayerTwo * 15 + "Love");
+                    }
+                    else
+                    {
+                        return ("Love" + playerOneSubPlayerTwo * -15);
+                    }
                 }
             }
 
-            else if (p1Subp2 > 0)
-            {
-                if (p1Subp2 == 3)
-                {
-                    return "40Love";
-                }
-                return (p1Subp2 * 15 + "Love");
 
-            }
-
-            else if (p1Subp2 < 0)
-            {
-                if (p1Subp2 == -3)
-                {
-                    return "Love40";
-                }
-                return ("Love"+p1Subp2 * -15 );
-            }
-
-            else
-            {
-                if (totalScoreAvg == 0)
-                {
-                    return "AllLove";
-                }
-
-                var result = totalScoreAvg * 15;
-                return result.ToString() + result;
-
-            }
-
-            return null;
+            var result = scoreAvg * 15;
+            return result.ToString() + result;
         }
+
     }
 }
+
