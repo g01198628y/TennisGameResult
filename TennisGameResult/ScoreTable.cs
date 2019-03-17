@@ -15,14 +15,12 @@ namespace TennisGameResult
         public string Result()
         {
             var playerOneSubPlayerTwo = PlayerOneScore - PlayerTwoScore;
-            float scoreAvg = (PlayerOneScore + PlayerTwoScore) / 2f;
+            var scoreAvg = (PlayerOneScore + PlayerTwoScore) / 2f;
 
             if (scoreAvg == 0)
             {
-                return "All Love";
+                return "Love All";
             }
-
-            //After Deuce
             if (scoreAvg >= 3)
             {
                 switch (playerOneSubPlayerTwo)
@@ -42,16 +40,12 @@ namespace TennisGameResult
 
             if (PlayerOneScore == 4 || PlayerTwoScore == 4)
             {
-                if (playerOneSubPlayerTwo > 0)
-                {
-                    return "PlayerOne Win!!!";
-                }
-                return "PlayerTwo Win!!!";
+                return playerOneSubPlayerTwo > 0 ? "PlayerOne Win!!!" : "PlayerTwo Win!!!";
             }
             return TranslateScore(PlayerOneScore) + TranslateScore(PlayerTwoScore);
         }
 
-        private string TranslateScore(int score)
+        public string TranslateScore(int score)
         {
             switch (score)
             {
