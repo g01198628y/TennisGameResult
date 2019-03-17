@@ -8,69 +8,65 @@ namespace TennisGameResult
 {
     public class ScoreTable
     {
-        public int playerOneScore { get; set; }
-        public int playerTwoScore { get; set; }
+        public int PlayerOneScore { get; set; }
+        public int PlayerTwoScore { get; set; }
 
 
-        public string score()
+        public string Result()
         {
-            var playerOneSubPlayerTwo = playerOneScore - playerTwoScore;
-            float scoreAvg = (playerOneScore + playerTwoScore) / 2f;
-
+            var playerOneSubPlayerTwo = PlayerOneScore - PlayerTwoScore;
+            float scoreAvg = (PlayerOneScore + PlayerTwoScore) / 2f;
 
             if (scoreAvg == 0)
             {
-                return "AllLove";
+                return "All Love";
             }
 
-            else if (scoreAvg >= 3)
+            //After Deuce
+            if (scoreAvg >= 3)
             {
                 switch (playerOneSubPlayerTwo)
                 {
                     case 0:
                         return "Deuce";
                     case 1:
-                        return "PlayerOneDecue1";
+                        return "PlayerOne Deuce1";
                     case -1:
-                        return "PlayerTwoDecue1";
+                        return "PlayerTwo Deuce1";
                     case 2:
-                        return "PlayerOneWin!!!";
+                        return "PlayerOne Win!!!";
                     case -2:
-                        return "PlayerTwoWin!!!";
+                        return "PlayerTwo Win!!!";
                 }
             }
 
-            else if (playerOneSubPlayerTwo != 0)
+            if (PlayerOneScore == 4 || PlayerTwoScore == 4)
             {
-                if (playerOneSubPlayerTwo == 3 || playerOneSubPlayerTwo == -3)
+                if (playerOneSubPlayerTwo > 0)
                 {
-                    if (playerOneSubPlayerTwo > 0)
-                    {
-                        return "40Love";
-                    }
-                    else
-                    {
-                        return "Love40";
-                    }
+                    return "PlayerOne Win!!!";
                 }
-                else
-                {
-                    if (playerOneSubPlayerTwo > 0)
-                    {
-                        return (playerOneSubPlayerTwo * 15 + "Love");
-                    }
-                    else
-                    {
-                        return ("Love" + playerOneSubPlayerTwo * -15);
-                    }
-                }
+                return "PlayerTwo Win!!!";
             }
-
-
-            var result = scoreAvg * 15;
-            return result.ToString() + result;
+            return TranslateScore(PlayerOneScore) + TranslateScore(PlayerTwoScore);
         }
 
+        private string TranslateScore(int score)
+        {
+            switch (score)
+            {
+                case 0:
+                    return "Love";
+                case 1:
+                    return "15";
+                case 2:
+                    return "30";
+                case 3:
+                    return "40";
+                default:
+                    return null;
+            }
+        }
     }
 }
 
