@@ -21,16 +21,21 @@ namespace TennisGameResult
             {
                 return "Love All";
             }
+
             if (scoreAvg >= 3)
             {
+                if (Math.Abs(playerOneSubPlayerTwo) >= 3)
+                {
+                    return "Out of Rule";
+                }
                 switch (playerOneSubPlayerTwo)
                 {
                     case 0:
                         return "Deuce";
                     case 1:
-                        return "PlayerOne Deuce1";
+                        return "PlayerOne Deuce One";
                     case -1:
-                        return "PlayerTwo Deuce1";
+                        return "PlayerTwo Deuce One";
                     case 2:
                         return "PlayerOne Win!!!";
                     case -2:
@@ -42,7 +47,7 @@ namespace TennisGameResult
             {
                 return playerOneSubPlayerTwo > 0 ? "PlayerOne Win!!!" : "PlayerTwo Win!!!";
             }
-            return TranslateScore(PlayerOneScore) + TranslateScore(PlayerTwoScore);
+            return TranslateScore(PlayerOneScore) + " " + TranslateScore(PlayerTwoScore);
         }
 
         public string TranslateScore(int score)
