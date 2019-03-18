@@ -18,18 +18,16 @@ namespace TennisGameResult
         {
             var playerOneSubPlayerTwo = PlayerOneScore - PlayerTwoScore;
             var scoreAvg = (PlayerOneScore + PlayerTwoScore) / 2f;
+            var deuceCondition = 3;
+            var winCondition = 4;
 
             if (scoreAvg == 0)
             {
                 return "Love All";
             }
 
-            if (scoreAvg >= 3)
+            if (scoreAvg >= deuceCondition || playerOneSubPlayerTwo >= winCondition)
             {
-                if (Math.Abs(playerOneSubPlayerTwo) >= 3)
-                {
-                    return "Out of Rule";
-                }
                 switch (playerOneSubPlayerTwo)
                 {
                     case 0:
@@ -39,15 +37,13 @@ namespace TennisGameResult
                     case -1:
                         return PlayerTwoName + " Deuce One";
                     case 2:
+                    case 4:
                         return PlayerOneName + " Win!!!";
                     case -2:
+                    case -4:
                         return PlayerTwoName + " Win!!!";
                 }
-            }
-
-            if (PlayerOneScore >= 4 || PlayerTwoScore >= 4)
-            {
-                return playerOneSubPlayerTwo > 0 ? PlayerOneName + " Win!!!" : PlayerTwoName + " Win!!!";
+                return "Out of Rule";
             }
             return TranslateScore(PlayerOneScore) + " " + TranslateScore(PlayerTwoScore);
         }
