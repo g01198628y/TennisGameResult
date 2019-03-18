@@ -50,8 +50,10 @@ namespace TennisGameResult
             var scoreTable = new ScoreTable();
             scoreTable.PlayerOneScore = 4;
             scoreTable.PlayerTwoScore = 0;
+            scoreTable.PlayerOneName = "P1";
+            scoreTable.PlayerTwoName = "P2";
             var result = scoreTable.Result();
-            Assert.AreEqual("PlayerOne Win!!!", result);
+            Assert.AreEqual("P1 Win!!!", result);
         }
         [TestMethod]
         public void GetGameResult_1vs1_Should_Return_15vs15()
@@ -95,8 +97,10 @@ namespace TennisGameResult
             var scoreTable = new ScoreTable();
             scoreTable.PlayerOneScore = 4;
             scoreTable.PlayerTwoScore = 3;
+            scoreTable.PlayerOneName = "P1";
+            scoreTable.PlayerTwoName = "P2";
             var result = scoreTable.Result();
-            Assert.AreEqual("PlayerOne Deuce One", result);
+            Assert.AreEqual("P1 Deuce One", result);
         }
         [TestMethod]
         public void GetGameResult_4vs4_Should_Return_Deuce()
@@ -113,8 +117,10 @@ namespace TennisGameResult
             var scoreTable = new ScoreTable();
             scoreTable.PlayerOneScore = 4;
             scoreTable.PlayerTwoScore = 5;
+            scoreTable.PlayerOneName = "P1";
+            scoreTable.PlayerTwoName = "P2";
             var result = scoreTable.Result();
-            Assert.AreEqual("PlayerTwo Deuce One", result);
+            Assert.AreEqual("P2 Deuce One", result);
         }
         [TestMethod]
         public void GetGameResult_4vs6_Should_Return_P2Win()
@@ -122,8 +128,10 @@ namespace TennisGameResult
             var scoreTable = new ScoreTable();
             scoreTable.PlayerOneScore = 4;
             scoreTable.PlayerTwoScore = 6;
+            scoreTable.PlayerOneName = "P1";
+            scoreTable.PlayerTwoName = "P2";
             var result = scoreTable.Result();
-            Assert.AreEqual("PlayerTwo Win!!!", result);
+            Assert.AreEqual("P2 Win!!!", result);
         }
 
     }

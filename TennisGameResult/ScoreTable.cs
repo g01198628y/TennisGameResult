@@ -8,6 +8,8 @@ namespace TennisGameResult
 {
     public class ScoreTable
     {
+        public string PlayerOneName { get; set; }
+        public string PlayerTwoName { get; set; }
         public int PlayerOneScore { get; set; }
         public int PlayerTwoScore { get; set; }
 
@@ -33,24 +35,24 @@ namespace TennisGameResult
                     case 0:
                         return "Deuce";
                     case 1:
-                        return "PlayerOne Deuce One";
+                        return PlayerOneName + " Deuce One";
                     case -1:
-                        return "PlayerTwo Deuce One";
+                        return PlayerTwoName + " Deuce One";
                     case 2:
-                        return "PlayerOne Win!!!";
+                        return PlayerOneName + " Win!!!";
                     case -2:
-                        return "PlayerTwo Win!!!";
+                        return PlayerTwoName + " Win!!!";
                 }
             }
 
-            if (PlayerOneScore == 4 || PlayerTwoScore == 4)
+            if (PlayerOneScore >= 4 || PlayerTwoScore >= 4)
             {
-                return playerOneSubPlayerTwo > 0 ? "PlayerOne Win!!!" : "PlayerTwo Win!!!";
+                return playerOneSubPlayerTwo > 0 ? PlayerOneName + " Win!!!" : PlayerTwoName + " Win!!!";
             }
             return TranslateScore(PlayerOneScore) + " " + TranslateScore(PlayerTwoScore);
         }
 
-        public string TranslateScore(int score)
+        private string TranslateScore(int score)
         {
             switch (score)
             {
