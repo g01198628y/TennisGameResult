@@ -5,41 +5,43 @@ namespace TennisGameResult
 {
     public class ScoreTable
     {
-        private int _winCondition = 4;
-        private int _deuceCondition = 3;
         public string PlayerOneName { get; set; }
         public string PlayerTwoName { get; set; }
         public int PlayerOneScore { get; set; }
         public int PlayerTwoScore { get; set; }
+        private const int WinCondition = 4;
+        private const int DeuceCondition = 3;
 
         public string Result()
         {
             var playerOneSubPlayerTwo = PlayerOneScore - PlayerTwoScore;
 
-            if (PlayerOneScore == 0 && PlayerTwoScore == 0)
+            if (AllPlayerScoreZero())
             {
                 return "Love All";
             }
 
-            if (Math.Abs(playerOneSubPlayerTwo) < _winCondition && !PlayerReadyToWin())
+            if (playerOneSubPlayerTwo != WinCondition && !PlayerReadyToWin())
                 return $"{TranslateScoreDictionary[PlayerOneScore]} {TranslateScoreDictionary[PlayerTwoScore]}";
 
-            switch (playerOneSubPlayerTwo)
+            switch (Math.Abs(playerOneSubPlayerTwo))
             {
                 case (int)DeuceOrWinCase.TwoPlayerSameScore:
                     return "Deuce";
 
-                case (int)DeuceOrWinCase.PlayerOneScoreOneMore:
-                case (int)DeuceOrWinCase.PlayerTwoScoreOneMore:
+                case (int)DeuceOrWinCase.OnePlayerScoreOneMore:
                     return PlayerDeuceResult();
 
-                case (int)DeuceOrWinCase.PlayerOneScoreTwoMore:
-                case (int)DeuceOrWinCase.PlayerTwoScoreTwoMore:
-                case (int)DeuceOrWinCase.PlayerOneScoreIsFourAndPlayerTwoScoreIsZero:
-                case (int)DeuceOrWinCase.PlayerOneScoreIsZeroAndPlayerTwoScoreIsFour:
+                case (int)DeuceOrWinCase.OnePlayerScoreTwoMore:
+                case (int)DeuceOrWinCase.OnePlayerScoreFourMore:
                     return PlayerWinResult();
             }
             return "Out of Rule";
+        }
+
+        private bool AllPlayerScoreZero()
+        {
+            return PlayerOneScore == 0 && PlayerTwoScore == 0;
         }
 
         private string PlayerWinResult()
@@ -54,7 +56,7 @@ namespace TennisGameResult
 
         private bool PlayerReadyToWin()
         {
-            return (PlayerOneScore >= _deuceCondition && PlayerTwoScore >= _deuceCondition);
+            return (PlayerOneScore >= DeuceCondition && PlayerTwoScore >= DeuceCondition);
         }
 
         private readonly Dictionary<int, string> TranslateScoreDictionary = new Dictionary<int, string>()
@@ -65,12 +67,9 @@ namespace TennisGameResult
         private enum DeuceOrWinCase
         {
             TwoPlayerSameScore = 0,
-            PlayerOneScoreOneMore = 1,
-            PlayerTwoScoreOneMore = -1,
-            PlayerOneScoreTwoMore = 2,
-            PlayerTwoScoreTwoMore = -2,
-            PlayerOneScoreIsFourAndPlayerTwoScoreIsZero = 4,
-            PlayerOneScoreIsZeroAndPlayerTwoScoreIsFour = -4
+            OnePlayerScoreOneMore = 1,
+            OnePlayerScoreTwoMore = 2,
+            OnePlayerScoreFourMore = 4,
         }
     }
 }
