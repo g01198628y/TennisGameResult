@@ -45,25 +45,13 @@ namespace TennisGameResult
                 }
                 return "Out of Rule";
             }
-            return TranslateScore(PlayerOneScore) + " " + TranslateScore(PlayerTwoScore);
+            return TranslateScoreDictionary[PlayerOneScore] + " " + TranslateScoreDictionary[PlayerTwoScore];
         }
 
-        private string TranslateScore(int score)
+        private readonly Dictionary<int, string> TranslateScoreDictionary = new Dictionary<int, string>()
         {
-            switch (score)
-            {
-                case 0:
-                    return "Love";
-                case 1:
-                    return "15";
-                case 2:
-                    return "30";
-                case 3:
-                    return "40";
-                default:
-                    return null;
-            }
-        }
+            {0, "Love"}, {1, "15"}, {2, "30"}, {3, "40"}
+        };
     }
 }
 
