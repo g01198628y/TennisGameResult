@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace TennisGameResult
 {
@@ -14,32 +15,31 @@ namespace TennisGameResult
         public string Result()
         {
             var playerOneSubPlayerTwo = PlayerOneScore - PlayerTwoScore;
-            var scoreAvg = (PlayerOneScore + PlayerTwoScore) / 2;
 
-            if (scoreAvg == 0 && playerOneSubPlayerTwo == 0)
+            if (PlayerOneScore == 0 && PlayerTwoScore == 0)
             {
                 return "Love All";
             }
 
-            if (scoreAvg >= _deuceCondition || playerOneSubPlayerTwo >= _winCondition)
+            if (Math.Abs(playerOneSubPlayerTwo) >= _winCondition || (PlayerOneScore >= _deuceCondition && PlayerTwoScore >= _deuceCondition))
             {
                 switch (playerOneSubPlayerTwo)
                 {
-                    case 0:
+                    case (int)DeuceOrWinCase.TwoPlayerSameScore:
                         return "Deuce";
 
-                    case 1:
+                    case (int)DeuceOrWinCase.PlayerOneScoreOneMore:
                         return PlayerOneName + " Deuce One";
 
-                    case -1:
+                    case (int)DeuceOrWinCase.PlayerTwoScoreOneMore:
                         return PlayerTwoName + " Deuce One";
 
-                    case 2:
-                    case 4:
+                    case (int)DeuceOrWinCase.PlayerOneScoreTwoMore:
+                    case (int)DeuceOrWinCase.PlayerOneScoreIsFourAndPlayerTwoScoreIsZero:
                         return PlayerOneName + " Win!!!";
 
-                    case -2:
-                    case -4:
+                    case (int)DeuceOrWinCase.PlayerTwoScoreTwoMore:
+                    case (int)DeuceOrWinCase.PlayerOneScoreIsZeroAndPlayerTwoScoreIsFour:
                         return PlayerTwoName + " Win!!!";
                 }
                 return "Out of Rule";
@@ -51,5 +51,16 @@ namespace TennisGameResult
         {
             {0, "Love"}, {1, "15"}, {2, "30"}, {3, "40"}
         };
+
+        private enum DeuceOrWinCase
+        {
+            TwoPlayerSameScore = 0,
+            PlayerOneScoreOneMore = 1,
+            PlayerTwoScoreOneMore = -1,
+            PlayerOneScoreTwoMore = 2,
+            PlayerTwoScoreTwoMore = -2,
+            PlayerOneScoreIsFourAndPlayerTwoScoreIsZero = 4,
+            PlayerOneScoreIsZeroAndPlayerTwoScoreIsFour = -4
+        }
     }
 }
