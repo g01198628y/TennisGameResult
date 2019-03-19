@@ -16,12 +16,12 @@ namespace TennisGameResult
         {
             var playerOneSubPlayerTwo = PlayerOneScore - PlayerTwoScore;
 
-            if (AllPlayerScoreZero())
+            if (IsAllPlayerScoreZero())
             {
                 return "Love All";
             }
 
-            if (playerOneSubPlayerTwo != WinCondition && !PlayerReadyToWin())
+            if (playerOneSubPlayerTwo != WinCondition && !IsPlayerInDeuceCondition())
                 return $"{TranslateScoreDictionary[PlayerOneScore]} {TranslateScoreDictionary[PlayerTwoScore]}";
 
             switch (Math.Abs(playerOneSubPlayerTwo))
@@ -39,7 +39,7 @@ namespace TennisGameResult
             return "Out of Rule";
         }
 
-        private bool AllPlayerScoreZero()
+        private bool IsAllPlayerScoreZero()
         {
             return PlayerOneScore == 0 && PlayerTwoScore == 0;
         }
@@ -54,7 +54,7 @@ namespace TennisGameResult
             return PlayerOneScore > PlayerTwoScore ? PlayerOneName + " Deuce One" : PlayerTwoName + " Deuce One";
         }
 
-        private bool PlayerReadyToWin()
+        private bool IsPlayerInDeuceCondition()
         {
             return (PlayerOneScore >= DeuceCondition && PlayerTwoScore >= DeuceCondition);
         }
