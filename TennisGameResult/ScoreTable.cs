@@ -21,27 +21,25 @@ namespace TennisGameResult
                 return "Love All";
             }
 
-            if (Math.Abs(playerOneSubPlayerTwo) >= _winCondition || PlayerReadyToWin())
+            if (Math.Abs(playerOneSubPlayerTwo) < _winCondition && !PlayerReadyToWin())
+                return $"{TranslateScoreDictionary[PlayerOneScore]} {TranslateScoreDictionary[PlayerTwoScore]}";
+
+            switch (playerOneSubPlayerTwo)
             {
-                switch (playerOneSubPlayerTwo)
-                {
-                    case (int)DeuceOrWinCase.TwoPlayerSameScore:
-                        return "Deuce";
+                case (int)DeuceOrWinCase.TwoPlayerSameScore:
+                    return "Deuce";
 
-                    case (int)DeuceOrWinCase.PlayerOneScoreOneMore:
-                    case (int)DeuceOrWinCase.PlayerTwoScoreOneMore:
-                        return PlayerDeuceResult();
+                case (int)DeuceOrWinCase.PlayerOneScoreOneMore:
+                case (int)DeuceOrWinCase.PlayerTwoScoreOneMore:
+                    return PlayerDeuceResult();
 
-                    case (int)DeuceOrWinCase.PlayerOneScoreTwoMore:
-                    case (int)DeuceOrWinCase.PlayerTwoScoreTwoMore:
-                    case (int)DeuceOrWinCase.PlayerOneScoreIsFourAndPlayerTwoScoreIsZero:
-                    case (int)DeuceOrWinCase.PlayerOneScoreIsZeroAndPlayerTwoScoreIsFour:
-                        return PlayerWinResult();
-                }
-                return "Out of Rule";
+                case (int)DeuceOrWinCase.PlayerOneScoreTwoMore:
+                case (int)DeuceOrWinCase.PlayerTwoScoreTwoMore:
+                case (int)DeuceOrWinCase.PlayerOneScoreIsFourAndPlayerTwoScoreIsZero:
+                case (int)DeuceOrWinCase.PlayerOneScoreIsZeroAndPlayerTwoScoreIsFour:
+                    return PlayerWinResult();
             }
-
-            return $"{TranslateScoreDictionary[PlayerOneScore]} {TranslateScoreDictionary[PlayerTwoScore]}";
+            return "Out of Rule";
         }
 
         private string PlayerWinResult()
