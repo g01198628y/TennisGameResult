@@ -21,7 +21,7 @@ namespace TennisGameResult
                 return "Love All";
             }
 
-            if (Math.Abs(playerOneSubPlayerTwo) >= _winCondition || (PlayerOneScore >= _deuceCondition && PlayerTwoScore >= _deuceCondition))
+            if (Math.Abs(playerOneSubPlayerTwo) >= _winCondition || PlayerReadyToWin())
             {
                 switch (playerOneSubPlayerTwo)
                 {
@@ -29,22 +29,34 @@ namespace TennisGameResult
                         return "Deuce";
 
                     case (int)DeuceOrWinCase.PlayerOneScoreOneMore:
-                        return PlayerOneName + " Deuce One";
-
                     case (int)DeuceOrWinCase.PlayerTwoScoreOneMore:
-                        return PlayerTwoName + " Deuce One";
+                        return PlayerDeuceResult();
 
                     case (int)DeuceOrWinCase.PlayerOneScoreTwoMore:
-                    case (int)DeuceOrWinCase.PlayerOneScoreIsFourAndPlayerTwoScoreIsZero:
-                        return PlayerOneName + " Win!!!";
-
                     case (int)DeuceOrWinCase.PlayerTwoScoreTwoMore:
+                    case (int)DeuceOrWinCase.PlayerOneScoreIsFourAndPlayerTwoScoreIsZero:
                     case (int)DeuceOrWinCase.PlayerOneScoreIsZeroAndPlayerTwoScoreIsFour:
-                        return PlayerTwoName + " Win!!!";
+                        return PlayerWinResult();
                 }
                 return "Out of Rule";
             }
-            return TranslateScoreDictionary[PlayerOneScore] + " " + TranslateScoreDictionary[PlayerTwoScore];
+
+            return $"{TranslateScoreDictionary[PlayerOneScore]} {TranslateScoreDictionary[PlayerTwoScore]}";
+        }
+
+        private string PlayerWinResult()
+        {
+            return PlayerOneScore > PlayerTwoScore ? PlayerOneName + " Win!!!" : PlayerTwoName + " Win!!!";
+        }
+
+        private string PlayerDeuceResult()
+        {
+            return PlayerOneScore > PlayerTwoScore ? PlayerOneName + " Deuce One" : PlayerTwoName + " Deuce One";
+        }
+
+        private bool PlayerReadyToWin()
+        {
+            return (PlayerOneScore >= _deuceCondition && PlayerTwoScore >= _deuceCondition);
         }
 
         private readonly Dictionary<int, string> TranslateScoreDictionary = new Dictionary<int, string>()
