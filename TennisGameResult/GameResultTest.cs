@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace TennisGameResult
 {
@@ -35,6 +34,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("30 Love", result);
         }
+
         [TestMethod]
         public void GetGameResult_3vs0_Should_Return_40vsLove()
         {
@@ -44,6 +44,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("40 Love", result);
         }
+
         [TestMethod]
         public void GetGameResult_4vs0_Should_Return_P1Win()
         {
@@ -55,6 +56,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("P1 Win!!!", result);
         }
+
         [TestMethod]
         public void GetGameResult_1vs1_Should_Return_15vs15()
         {
@@ -64,6 +66,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("15 15", result);
         }
+
         [TestMethod]
         public void GetGameResult_0vs1_Should_Return_0vsLove()
         {
@@ -73,6 +76,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("Love 15", result);
         }
+
         [TestMethod]
         public void GetGameResult_2vs3_Should_Return_30vs40()
         {
@@ -82,6 +86,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("30 40", result);
         }
+
         [TestMethod]
         public void GetGameResult_3vs3_Should_Return_Deuce()
         {
@@ -91,6 +96,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("Deuce", result);
         }
+
         [TestMethod]
         public void GetGameResult_4vs3_Should_Return_P1Deuce1()
         {
@@ -102,6 +108,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("P1 Deuce One", result);
         }
+
         [TestMethod]
         public void GetGameResult_4vs4_Should_Return_Deuce()
         {
@@ -111,6 +118,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("Deuce", result);
         }
+
         [TestMethod]
         public void GetGameResult_4vs5_Should_Return_P2Deuce1()
         {
@@ -122,6 +130,7 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("P2 Deuce One", result);
         }
+
         [TestMethod]
         public void GetGameResult_4vs6_Should_Return_P2Win()
         {
@@ -133,6 +142,5 @@ namespace TennisGameResult
             var result = scoreTable.Result();
             Assert.AreEqual("P2 Win!!!", result);
         }
-
     }
 }
