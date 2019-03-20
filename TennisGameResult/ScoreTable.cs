@@ -15,28 +15,37 @@ namespace TennisGameResult
         public string Result()
         {
             var playerOneSubPlayerTwo = PlayerOneScore - PlayerTwoScore;
-
+            var hightestScore = GetHigherScore();
             if (IsAllPlayerScoreZero())
             {
                 return "Love All";
             }
 
-            if (playerOneSubPlayerTwo != WinCondition && !IsPlayerInDeuceCondition())
+            if (!IsPlayerInDeuceCondition() && hightestScore < WinCondition)
                 return $"{TranslateScoreDictionary[PlayerOneScore]} {TranslateScoreDictionary[PlayerTwoScore]}";
 
-            switch (Math.Abs(playerOneSubPlayerTwo))
+            if (IsPlayerInDeuceCondition() || hightestScore == WinCondition)
             {
-                case (int)DeuceOrWinCase.TwoPlayerSameScore:
-                    return "Deuce";
+                switch (Math.Abs(playerOneSubPlayerTwo))
+                {
+                    case (int)DeuceOrWinCase.TwoPlayerSameScore:
+                        return "Deuce";
 
-                case (int)DeuceOrWinCase.OnePlayerScoreOneMore:
-                    return PlayerDeuceResult();
+                    case (int)DeuceOrWinCase.OnePlayerScoreOneMore:
+                        return PlayerDeuceResult();
 
-                case (int)DeuceOrWinCase.OnePlayerScoreTwoMore:
-                case (int)DeuceOrWinCase.OnePlayerScoreFourMore:
-                    return PlayerWinResult();
+                    case (int)DeuceOrWinCase.OnePlayerScoreTwoMore:
+                    case (int)DeuceOrWinCase.OnePlayerScoreFourMore:
+                        return PlayerWinResult();
+                }
             }
+
             return "Out of Rule";
+        }
+
+        private int GetHigherScore()
+        {
+            return PlayerOneScore > PlayerTwoScore ? PlayerOneScore : PlayerTwoScore;
         }
 
         private bool IsAllPlayerScoreZero()
