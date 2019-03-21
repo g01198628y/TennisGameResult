@@ -21,26 +21,31 @@ namespace TennisGameResult
                 return "Love All";
             }
 
-            if (!IsPlayerInDeuceCondition() && hightestScore < WinCondition)
+            if (!IsPlayerInDeuceCondition() && IsHighestScoreSmallerThanWinCondition(hightestScore))
                 return $"{TranslateScoreDictionary[PlayerOneScore]} {TranslateScoreDictionary[PlayerTwoScore]}";
 
             if (IsPlayerInDeuceCondition() || hightestScore == WinCondition)
             {
-                switch (Math.Abs(playerOneSubPlayerTwo))
+                switch ((DeuceOrWinCase)Math.Abs(playerOneSubPlayerTwo))
                 {
-                    case (int)DeuceOrWinCase.TwoPlayerSameScore:
+                    case DeuceOrWinCase.TwoPlayerSameScore:
                         return "Deuce";
 
-                    case (int)DeuceOrWinCase.OnePlayerScoreOneMore:
+                    case DeuceOrWinCase.OnePlayerScoreOneMore:
                         return PlayerDeuceResult();
 
-                    case (int)DeuceOrWinCase.OnePlayerScoreTwoMore:
-                    case (int)DeuceOrWinCase.OnePlayerScoreFourMore:
+                    case DeuceOrWinCase.OnePlayerScoreTwoMore:
+                    case DeuceOrWinCase.OnePlayerScoreFourMore:
                         return PlayerWinResult();
                 }
             }
 
             return "Out of Rule";
+        }
+
+        private static bool IsHighestScoreSmallerThanWinCondition(int hightestScore)
+        {
+            return hightestScore < WinCondition;
         }
 
         private int GetHigherScore()
